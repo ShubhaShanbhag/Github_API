@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import GitAccount from "./components/GitAccount";
+import GitRepo from "./components/GitRepo";
+import "./index.css"
 function App() {
+  const [username, setUsername] = useState("ShubhaShanbhag");
+ 
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+   const handleSubmit = (e) => {
+     e.preventDefault();
+   };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Github User</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Enter GitHub Username:
+          <input
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </label>
+        
+        <button type="submit">submit</button>
+      </form>
+      <GitAccount username={username} />
+      <GitRepo username={username}/>
     </div>
   );
 }
